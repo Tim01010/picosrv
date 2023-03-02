@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LED Toggle</title>
+</head>
+<body>
+    <button data-action="toggle">Toggle LED</button>
+    <button data-action="on">Turn LED on</button>
+    <button data-action="off">Turn LED off</button>
+
+    <script>
+        for(const element of document.querySelectorAll("button")) {
+            element.addEventListener("click", () => {
+                fetch("/led_action?action=" + element.getAttribute("data-action"));
+            });
+        }
+    </script>
+</body>
+</html>
