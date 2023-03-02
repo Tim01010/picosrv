@@ -74,7 +74,7 @@ The request object contains all the information the browser has sent to the pico
 ##### Example
 When opening `http://1.2.3.4/hello%20world/start?abc=def&numbers=123` the request object will look something like this:
 
-```json
+```yaml
 path: "/hello world/start"
 parameters: {
     abc: "def"
