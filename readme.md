@@ -1,4 +1,4 @@
-# PicoHTTP
+# PicoSRV
 A simple library that allows hosting a HTTP Server on a Raspberry Pi Pico W
 
 ## Installation
@@ -10,7 +10,7 @@ Create 2 files on the pico.
 ## Usage
 
 ### Connecting to the wifi
-To use PicoHTTP you must first connect to your wifi.
+To use PicoSRV you must first connect to your wifi.
 
 ```py
 import wifi
