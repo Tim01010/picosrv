@@ -11,7 +11,6 @@ def connect_with_secrets(secrets, static_ip=None) -> str:
 
 
 def connect(name: str, password: str, static_ip=None) -> str:
-    print("wifi.connect called")
     wlan = network.WLAN(network.STA_IF)
     wlan.active(True)
     if static_ip is not None:

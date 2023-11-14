@@ -1,10 +1,10 @@
 # PicoSRV
-A simple library that allows hosting a HTTP Server on a Raspberry Pi Pico W
+A simple library for hosting HTTP Servers on [Raspberry Pi Pico W](https://datasheets.raspberrypi.com/picow/pico-w-product-brief.pdf) devices.
 
 ## Installation
 
 Create 2 files on the pico.
-1. A file called `wifi.py` with the content of [wifi.py on this repository](wifi.py) in it.
+1. A file called `wifi.py` with the contents of [wifi.py on this repository](wifi.py) in it.
 2. Repeat with [httpserver.py](httpserver.py).
 
 ## Usage
@@ -21,10 +21,10 @@ ip = wifi.connect("YOUR WIFI NAME", "YOUR WIFI PASSWORD") # Connect to the wifi 
 print(f"IP Address: {ip}") # Log the ip address
 ```
 
-If you run this you should see the device connecting to the wifi and sending its IP Address.
+Running this should result in the device connecting to the wifi and sending its IP Address.
 
-### Creating a http server
-Next, let's create a simple server:
+### Creating a HTTP server
+Next, let's HTTP a simple server:
 
 1. Import all the neccessary tools
     ```py
@@ -43,7 +43,7 @@ Next, let's create a simple server:
     run_server(callback)
     ```
 
-    The code should look something like this once you're done:
+    Your code should look something like this once you're done:
     ```py
     import wifi
     from httpserver import Request, response, run as run_server, send_text_file
@@ -55,24 +55,24 @@ Next, let's create a simple server:
     print(f"IP Address: {ip}")
 
     def callback(req: Request) -> str:
-        return response("hello world!")
+        return response("hello browser!")
 
     run_server(callback)
     ```
-    If you run this code and open the IP address in your browser you should see "hello world!" from the pico.
+    Running this code and opening the IP address in your browser should result in you seeing "hello browser!" from the pico in your browser.
 
 #### The Request Object
-The request object contains all the information the browser has sent to the pico:
-+ `.method` is the [request method](https://developer.mozilla.org/docs/Web/HTTP/Methods), and will usually be `GET`
+The request object contains information the browser has sent to the pico:
++ `.method` is the [request method](https://developer.mozilla.org/docs/Web/HTTP/Methods), it will usually be `GET`.
 
-+ `.path` is the path, with `1.2.3.4/a/b` the path will be `/a/b`
++ `.path` is the path, with `1.2.3.4/a/b` the path would be `/a/b`.
 
-+ `.parameters` are the parameters contained within the url as a dictionary
++ `.parameters` are the parameters contained within the url as a dictionary.
 
 + `.body` the request body. Only available with `POST` and `PUT` requests.
 
 ##### Example
-When opening `http://1.2.3.4/hello%20world/start?abc=def&numbers=123` the request object will look something like this:
+When opening `http://1.2.3.4/hello%20world/start?abc=def&numbers=123` the request object would look something like this:
 
 ```yaml
 path: "/hello world/start"
@@ -84,9 +84,9 @@ method: "GET"
 ```
 
 #### The Response String
-Your callback function is supposed to return a http response string, not plain html code. The `response()` function is able to generate proper responses.
+Your callback function is expected to return a [HTTP response string](https://developer.mozilla.org/en-US/docs/Web/HTTP/Session#structure_of_a_server_response), The `response()` function is able to generate such responses.
 
-`response("<p>hello world</p>")` returns something similar to this:
+`response("<p>hello world</p>")` returns something similar to:
 ```
 HTTP/1.0 200 OK
 Content-Type: text/html
@@ -106,6 +106,9 @@ return send_text_file("test.html")
 ```
 sends the content of `test.html` from the pico's storage.
 
+Please note that this function is only designed for `.html`, `.css`, `.js` and `.json` files, other file types may lead to unexpected behavior.
+
+Using a CDN to serve images and other big files is highly recommended.
 
 ### More Examples
 You can view more examples in the [examples directory](/examples) of this repository.

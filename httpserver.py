@@ -98,14 +98,16 @@ class Request:
                 
 
 def run(callback, port=80):
-    print("configuring server")
+    if debug:
+        print("configuring server")
     addr = socket.getaddrinfo("0.0.0.0", port)[0][-1]
     sock = socket.socket()
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     sock.bind(addr)
     sock.listen(1)
 
-    print("waiting for connections")
+    if debug:
+        print("waiting for connections")
     while True:
         cl = None
         try:
