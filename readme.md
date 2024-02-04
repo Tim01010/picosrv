@@ -24,7 +24,7 @@ print(f"IP Address: {ip}") # Log the ip address
 Running this should result in the device connecting to the wifi and sending its IP Address.
 
 ### Creating a HTTP server
-Next, let's HTTP a simple server:
+Next, let's create a simple server:
 
 1. Import all the neccessary tools
     ```py
