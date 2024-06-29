@@ -1,5 +1,5 @@
 import wifi
-from httpserver import Request, response, run as run_server, send_text_file
+from httpserver import Request, response, run as run_server, send_text_file, redirect
 import json
 import random
 
@@ -42,7 +42,7 @@ def callback(req: Request) -> str:
 
         return response(f"Shortened URL: <a href='{url}'>{url}</a><br><a href='/'><button>Shorten another one</button></a>")
     elif(req.path in urls):
-        return f"HTTP/1.0 301 Moved Permanently\r\nLocation: {urls[req.path]}\r\n\r\n"
+        return redirect(urls[req.path])
 
 
 

@@ -2,11 +2,16 @@ import socket
 
 debug = False
 
+# HTTP/1.0 methods
+ALLOWED_METHODS = ("GET", "POST", "HEAD")
+
 class Request:
     def __init__(self, raw: str):
         lines = raw.splitlines()
         first_line = lines[0].split(" ")
         self.method = first_line[0]
+        if self.method not in ALLOWED_METHODS:
+            raise Exception(f"method {self.method} not allowed")
         self.path = "" 
         self.parameters = {}
 
@@ -72,7 +77,7 @@ class Request:
             if(i == 0): continue
             if(self.method == "POST" or self.method == "PUT") and len(line) == 0 and i < end - 1:
                 self.body = "\n".join(lines[(i + 1):])
-                break           
+                break
 
 
             key = ""
@@ -126,6 +131,10 @@ def run(callback, port=80):
 
 def response(html: str, status_code: int = 200, content_type: str = "text/html") -> str:
     return f"HTTP/1.0 {status_code} OK\r\nContent-Type: {content_type}\r\n\r\n{html}"
+
+
+def redirect(url: str, status_code = 302) -> str:
+    return f"HTTP/1.0 {status_code} Redirect\r\nLocation: {url}\r\n\r\n"
 
 
 mimetypes = {
